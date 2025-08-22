@@ -24,12 +24,12 @@ export default function ErrorShowing({ messages, optimized_code }) {
 
 
   if (!messages) {
-    return <p className="text-gray-500">No analysis data available.</p>;
+    return <p className="ml-2 text-gray-500">No analysis data available.</p>;
   }
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">Code Analysis Report</h2>
+      <h2 className="ml-2 text-xl font-bold">Code Analysis Report</h2>
 
       {/* Messages */}
       {messages.map((msg, idx) => (
@@ -55,7 +55,7 @@ export default function ErrorShowing({ messages, optimized_code }) {
 
       {/* Optimized Code */}
       <div className="mt-4">
-        <h3 className="text-lg font-bold">Optimized Code</h3>
+        <h3 className="ml-2 text-lg font-bold">Optimized Code</h3>
         <pre className="bg-gray-900 text-green-400 p-4 rounded-md overflow-x-auto text-sm">
           <OptimizedCodeBlock optimized_code={optimized_code} />
           {/* {optimized_code} */}

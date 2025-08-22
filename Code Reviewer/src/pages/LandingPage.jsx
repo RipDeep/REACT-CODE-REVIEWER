@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function LandingPage() {
 
   return (
-    <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black w-screen h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black w-screen h-full overflow-hidden">
       {/* Navbar */}
       <Navbar />
 
@@ -78,7 +78,7 @@ function LandingPage() {
           </motion.div>
 
           <motion.div
-            className="bg-gray-800/50 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-700"
+            className="mb-5 bg-gray-800/50 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-700"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
