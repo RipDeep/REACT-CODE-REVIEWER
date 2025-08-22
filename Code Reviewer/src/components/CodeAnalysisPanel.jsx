@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useEffect } from "react";
-import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+
+
 
 
 const CodeAnalysisPanel = ({ data, updateParentVal, setLoadingParent }) => {
