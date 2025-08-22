@@ -119,11 +119,11 @@ const AnalysisResultsPanel = ({
             <div className="px-6 py-4 border-b border-gray-700 bg-gray-900/30">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-semibold text-indigo-400">Analysis Results</h3>
-                    
+
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                     <div className="text-center p-4 bg-gray-900/50 rounded shadow border border-gray-700">
                         <div className="text-red-500 text-2xl font-bold mb-1">{criticalCount}</div>
                         <div className="text-xs text-gray-400 uppercase font-medium">Critical</div>
@@ -137,6 +137,7 @@ const AnalysisResultsPanel = ({
                         <div className="text-xs text-gray-400 uppercase font-medium">Info</div>
                     </div>
                 </div>
+
 
                 {/* Overall Score */}
                 <div className="text-center">
@@ -166,7 +167,7 @@ const AnalysisResultsPanel = ({
 
                 <div className="flex flex-wrap gap-2 mb-2">
                     <div className="px-3 py-1 bg-indigo-500 text-white rounded-full text-xs cursor-pointer">All Issues</div>
-                    
+
                 </div>
 
                 <div className="flex flex-col gap-1">

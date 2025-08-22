@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 function Navbar() {
-  const[toastMessage, setToastMessage] = useState(null);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const showToast = (message) => {
     setToastMessage(message);
     setTimeout(() => setToastMessage(null), 2500);
@@ -29,25 +32,79 @@ function Navbar() {
           </span>
         </div>
 
-        {/* Links */}
+        {/* Desktop Links */}
         <div className="hidden md:flex gap-5 items-center">
-          <Link
+          <button
             onClick={() => showToast("History feature is on the way!")}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200">
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200"
+          >
             History
-          </Link>
-          <Link
+          </button>
+          <button
             onClick={() => showToast("Settings feature is on the way!")}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200">
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200"
+          >
             Settings
-          </Link>
-          <Link
+          </button>
+          <button
             onClick={() => showToast("New Review feature is on the way!")}
-            className="px-5 py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg hover:scale-105 transition-transform">
+            className="px-5 py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg hover:scale-105 transition-transform"
+          >
             New Review
-          </Link>
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
+          <button onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? (
+              <X className="text-white w-6 h-6" />
+            ) : (
+              <Menu className="text-white w-6 h-6" />
+            )}
+          </button>
         </div>
       </motion.div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden overflow-hidden bg-gray-900/80 backdrop-blur-md rounded-b-2xl border border-gray-700 mt-2"
+          >
+            <button
+              onClick={() => {
+                showToast("History feature is on the way!");
+                setMenuOpen(false);
+              }}
+              className="w-full text-left px-6 py-3 border-b border-gray-700 text-gray-300 hover:bg-gray-800 transition"
+            >
+              History
+            </button>
+            <button
+              onClick={() => {
+                showToast("Settings feature is on the way!");
+                setMenuOpen(false);
+              }}
+              className="w-full text-left px-6 py-3 border-b border-gray-700 text-gray-300 hover:bg-gray-800 transition"
+            >
+              Settings
+            </button>
+            <button
+              onClick={() => {
+                showToast("New Review feature is on the way!");
+                setMenuOpen(false);
+              }}
+              className="w-full text-left px-6 py-3 text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 transition"
+            >
+              New Review
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {toastMessage && (
           <motion.div

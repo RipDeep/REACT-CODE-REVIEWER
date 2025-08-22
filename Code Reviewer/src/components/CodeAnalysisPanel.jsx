@@ -212,171 +212,143 @@ const languageExtensions = {
 return (
 
     <div className="bg-gray-800/50 backdrop-blur-md rounded-2xl border border-gray-700 shadow-lg flex flex-col min-h-[700px] overflow-hidden relative">
-        {loading && (
-            <div className="absolute inset-0 bg-gray-900/70 z-50 flex flex-col items-center justify-center">
-                <svg
-                    className="animate-spin h-10 w-10 text-indigo-500 mb-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                >
-                    <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                    ></circle>
-                    <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                    ></path>
-                </svg>
-                <p className="text-white text-lg font-semibold">Analyzing code...</p>
-            </div>
-        )}
-        {/* Panel Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-700 bg-gray-900/30">
-            <div className="flex flex-col gap-1">
-                <h2 className="text-lg font-semibold text-indigo-400">Code Analysis</h2>
-                <div className="flex gap-4 text-sm text-gray-400">
-                    <span>{fileSelected ? `${fileName}.${extension}` : "No file selected"}</span>
-                    <span className="bg-gray-700/50 px-2 rounded text-xs">-- {fileSizeKB ? `${fileSizeKB} KB` : "-- KB"}
-                    </span>
-                </div>
-            </div>
-            <div className="flex gap-3">
-                <button
-                    onClick={() => document.getElementById("fileInput").click()}
-                    className="flex items-center gap-1 px-3 py-1 bg-gray-700/50 text-gray-300 rounded hover:bg-gray-700/70 transition">
-                    <i className="feather-download"></i> Import
-                </button>
-                <div>
-                    <input
-                        type="file"
-                        id="fileInput"
-                        accept=".py,.js,.ts,.java,.c,.cpp,.cs,.go,.php,.rb,.swift,.kt,.rs,.scala,.dart"
-                        className="hidden"
-                        onChange={handleFileImport}
-                    />
-                </div>
 
-                <input
-                    type="file"
-                    id="fileInput"
-                    accept=".py,.js,.ts,.java,.c,.cpp,.cs,.go,.php,.rb,.swift,.kt,.rs,.scala,.dart"
-                    className="hidden"
-                    onChange={handleFileImport}
-                />
+  {/* Loading Overlay */}
+  {loading && (
+    <div className="absolute inset-0 bg-gray-900/70 z-50 flex flex-col items-center justify-center">
+      <svg
+        className="animate-spin h-10 w-10 text-indigo-500 mb-4"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        ></circle>
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+        ></path>
+      </svg>
+      <p className="text-white text-lg font-semibold">Analyzing code...</p>
+    </div>
+  )}
 
-                <button
-                    onClick={Reanalyze}
-                    className="flex items-center gap-1 px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition">
-                    <i className="feather-refresh-cw"></i> Re-analyze
-                </button>
-            </div>
-        </div>
+  {/* Panel Header */}
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-4 sm:px-6 py-4 border-b border-gray-700 bg-gray-900/30 gap-4 sm:gap-0">
+    <div className="flex flex-col gap-1 w-full sm:w-auto">
+      <h2 className="text-lg font-semibold text-indigo-400">Code Analysis</h2>
+      <div className="flex flex-row sm:flex-row gap-2 text-sm text-gray-400">
+        <span>{fileSelected ? `${fileName}.${extension}` : "No file selected"}</span>
+        <span className="bg-gray-700/50 px-2 rounded text-xs">{fileSizeKB ? `${fileSizeKB} KB` : "-- KB"}</span>
+      </div>
+    </div>
 
-        {/* File Tabs */}
-        <div className="flex overflow-x-auto justify-between border-b border-gray-700 bg-gray-900/20 ">
-            <div
-                className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-b-2 ${fileSelected ? "border-indigo-500 text-indigo-400 font-medium" : "border-transparent text-gray-400"
-                    }`}
-                onClick={() => setFileSelected(true)}
-            >
-                {fileName}.{extension}
-            </div>
+    {/* Import + Re-analyze buttons */}
+    <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+      <label
+        htmlFor="fileInput"
+        className="flex items-center justify-center gap-1 px-3 py-2 bg-gray-700/50 text-gray-300 rounded hover:bg-gray-700/70 transition cursor-pointer w-full sm:w-auto text-center"
+      >
+        <i className="feather-download"></i> Import
+      </label>
+      <input
+        type="file"
+        id="fileInput"
+        accept=".py,.js,.ts,.java,.c,.cpp,.cs,.go,.php,.rb,.swift,.kt,.rs,.scala,.dart"
+        className="hidden"
+        onChange={handleFileImport}
+      />
 
+      <button
+        onClick={Reanalyze}
+        className="flex items-center justify-center gap-1 px-3 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition w-full sm:w-auto"
+      >
+        <i className="feather-refresh-cw"></i> Re-analyze
+      </button>
+    </div>
+  </div>
 
+  {/* File Tabs + Language Select */}
+  <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-3 border-b border-gray-700 gap-3">
+    <div
+      className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-b-2 ${fileSelected ? "border-indigo-500 text-indigo-400 font-medium" : "border-transparent text-gray-400"}`}
+      onClick={() => setFileSelected(true)}
+    >
+      {fileName}.{extension}
+    </div>
 
-            <div className="relative mt-4 mb-4 flex item-center justify-between">
-                <select
-                    value={language}
-                    onChange={(e) => {
-                        const selectedLang = e.target.value;
-                        setLanguage(e.target.value);
-                        setExtension(languageExtensions[selectedLang]);
-                        commentGenerate(selectedLang)
-                    }
-                    }
-                    className="bg-gray-800 text-gray-200 px-9 py-2 rounded-xl border border-gray-700 shadow-sm
-                    focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer text-sm w-full"
-                >
-                    {Object.keys(languageExtensions).map((lang) => (
-                        <option
+    <div className=" relative w-full sm:w-1/3">
+      <select
+        value={language}
+        onChange={(e) => {
+          const selectedLang = e.target.value;
+          setLanguage(selectedLang);
+          setExtension(languageExtensions[selectedLang]);
+          commentGenerate(selectedLang);
+        }}
+        className="bg-gray-800 text-gray-200 px-3 py-2 rounded-xl border border-gray-700 shadow-sm w-full appearance-none cursor-pointer text-sm sm:px-3"
+      >
+        {Object.keys(languageExtensions).map((lang) => (
+          <option key={lang} value={lang} className="bg-gray-800 text-gray-200">
+            {lang} 
+          </option>
+        ))}
+      </select>
 
-                            key={lang}
-                            value={lang}
-                            className="bg-gray-800 text-gray-200"
-                        >
-                            {lang}
-                        </option>
-                    ))}
-                </select>
+      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
 
-                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                    <svg
-                        className="w-4 h-4 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
-                </div>
-            </div>
+    <button
+      onClick={analyzeCodeHandler}
+      className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl shadow-lg w-full sm:w-auto"
+    >
+      Submit
+    </button>
+  </div>
 
+  {/* Editor */}
+  <div className="flex-1 relative h-[60vh] sm:h-[80vh] overflow-auto">
+    {fileSelected ? (
+      <Editor
+        height="100vh"
+        language={language}
+        theme="vs-dark"
+        value={code}
+        onChange={(value) => setCode(value)}
+        defaultValue={comment}
+        options={{
+          fontSize: 14,
+          minimap: { enabled: false },
+          lineNumbers: "on",
+          lineNumbersMinChars: 3,
+          renderLineHighlight: "all",
+          scrollBeyondLastLine: false,
+          automaticLayout: true,
+        }}
+        onMount={(editor, monaco) => {
+          monaco.editor.setTheme("vs-dark");
+        }}
+      />
+    ) : (
+      <div className="absolute inset-0 bg-gray-900/50 flex flex-col items-center justify-center z-10 rounded-b-2xl">
+        <i className="feather-file-text text-gray-500 text-4xl mb-2"></i>
+        <p className="text-gray-400">Select a file to view code</p>
+      </div>
+    )}
+  </div>
+</div>
 
-
-            <button
-                onClick={analyzeCodeHandler}
-                className="flex items-center justify-center px-4 py-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl shadow-lg mx-3 my-4 cursor-pointer">
-                Submit
-            </button>
-
-
-        </div>
-
-        {/* Editor */}
-        <div className="flex-1 relative h-screen">
-            {fileSelected ? (
-                <Editor
-                    height="80vh"
-                    language={language}
-                    theme="vs-dark"
-                    value={code}
-                    onChange={(value) => setCode(value)}
-                    defaultValue={`# Start coding...\n \n \n \n`}
-                    options={{
-                        fontSize: 14,
-                        minimap: { enabled: false },
-                        lineNumbers: "on",
-                        lineNumbersMinChars: 3,
-                        renderLineHighlight: "all",
-                        scrollBeyondLastLine: false,
-                        automaticLayout: true,
-                    }}
-                    onMount={(editor, monaco) => {
-                        monaco.editor.setTheme("vs-dark");
-                    }}
-                />
-
-
-            ) : (
-                <div className="absolute inset-0 bg-gray-900/50 flex flex-col items-center justify-center z-10 rounded-b-2xl">
-                    <i className="feather-file-text text-gray-500 text-4xl mb-2"></i>
-                    <p className="text-gray-400">Select a file to view code</p>
-                </div>
-            )}
-        </div>
-    </div >
 );
     };
 
