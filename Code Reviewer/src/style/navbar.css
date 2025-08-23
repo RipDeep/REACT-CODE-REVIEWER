@@ -1,0 +1,19 @@
+/* In your global CSS */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.3);
+  border-radius: 9999px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5); /* Indigo-500 */
+  border-radius: 9999px;
+}
+
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.5) rgba(30, 30, 30, 0.3);
+}
