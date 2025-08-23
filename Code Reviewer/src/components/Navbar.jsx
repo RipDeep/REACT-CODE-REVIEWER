@@ -106,14 +106,18 @@ function Navbar({ ReanalyzeParent, loadSettingsValParent = () => { } }) {
         className="flex items-center justify-between w-full px-8 py-5 bg-gray-900/50 backdrop-blur-md rounded-2xl shadow-lg border border-gray-700"
       >
         {/* Logo + Badge */}
-        <div className="flex gap-2 items-center">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-wide">
-            CodeReview <span className="text-indigo-400">AI</span>
-          </h1>
-          <span className="bg-gradient-to-r from-indigo-500 to-purple-600 text-xs font-bold uppercase rounded-full px-3 py-1 text-white shadow-md">
-            Beta
-          </span>
-        </div>
+        <Link to={'/'}>
+          <div className="flex gap-2 items-center">
+
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-wide">
+              CodeReview <span className="text-indigo-400">AI</span>
+            </h1>
+            <span className="bg-gradient-to-r from-indigo-500 to-purple-600 text-xs font-bold uppercase rounded-full px-3 py-1 text-white shadow-md">
+              Beta
+            </span>
+
+          </div>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-5 items-center">
@@ -130,7 +134,6 @@ function Navbar({ ReanalyzeParent, loadSettingsValParent = () => { } }) {
             Settings
           </button> */}
           <Link
-
             onClick={() => {
               ReanalyzeParent()
             }}
@@ -345,7 +348,7 @@ function Navbar({ ReanalyzeParent, loadSettingsValParent = () => { } }) {
                   {/* Close Button */}
                   <button
                     onClick={() => (
-                      
+
                       setShowHistory(false))}
                     className="text-gray-400 hover:text-white"
                   >
