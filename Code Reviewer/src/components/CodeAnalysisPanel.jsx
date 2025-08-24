@@ -312,7 +312,7 @@ const CodeAnalysisPanel = ({ data, updateParentVal, setLoadingParent }) => {
         <div className="flex flex-col gap-1 w-full sm:w-auto">
           <h2 className="text-lg font-semibold text-indigo-400">Code Analysis</h2>
           <div className="flex flex-row sm:flex-row gap-2 text-sm text-gray-400">
-            <span>{fileSelected ? `${fileName}.${extension}` : "No file selected"}</span>
+            <span>{fileSelected ? `${fileName}${extension}` : "No file selected"}</span>
             <span className="bg-gray-700/50 px-2 rounded text-xs">{fileSizeKB ? `${fileSizeKB} KB` : "-- KB"}</span>
           </div>
         </div>
@@ -358,7 +358,7 @@ const CodeAnalysisPanel = ({ data, updateParentVal, setLoadingParent }) => {
           className={`flex items-center gap-2 px-4 py-2 cursor-pointer border-b-2 ${fileSelected ? "border-indigo-500 text-indigo-400 font-medium" : "border-transparent text-gray-400"}`}
           onClick={() => setFileSelected(true)}
         >
-          {fileName}.{extension}
+          {fileName}{extension}
         </div>
 
         <div className=" relative w-full sm:w-1/3">
